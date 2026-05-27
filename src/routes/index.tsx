@@ -1,29 +1,86 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Mail, NotebookPen, CalendarCheck2, BookOpenText, MessagesSquare, ArrowRight, Sparkles, ShieldAlert } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Dashboard — WorkMind AI" },
+      { name: "description", content: "Your AI-powered workplace productivity dashboard." },
     ],
   }),
-  component: Index,
+  component: Dashboard,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const tools = [
+  { to: "/email", title: "Smart Email Generator", desc: "Draft professional emails in any tone.", icon: Mail },
+  { to: "/notes", title: "Meeting Notes Summarizer", desc: "Extract decisions, action items, and deadlines.", icon: NotebookPen },
+  { to: "/planner", title: "AI Task Planner", desc: "Build prioritized daily or weekly schedules.", icon: CalendarCheck2 },
+  { to: "/research", title: "AI Research Assistant", desc: "Summarize topics with insights and sources.", icon: BookOpenText },
+  { to: "/chat", title: "AI Chatbot", desc: "Ask anything — your always-on workplace copilot.", icon: MessagesSquare },
+] as const;
+
+function Dashboard() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="mx-auto w-full max-w-6xl px-4 py-8 md:px-8 md:py-12">
+      <section
+        className="relative overflow-hidden rounded-2xl border p-8 md:p-12"
+        style={{ background: "var(--gradient-subtle)", boxShadow: "var(--shadow-soft)" }}
+      >
+        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30 blur-3xl" style={{ background: "var(--gradient-primary)" }} />
+        <div className="relative">
+          <div className="inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+            Powered by AI
+          </div>
+          <h1 className="mt-4 max-w-2xl text-3xl font-semibold leading-tight md:text-5xl">
+            Your workplace, <span style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>amplified by AI</span>.
+          </h1>
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground md:text-base">
+            Write emails, summarize meetings, plan tasks, and research smarter. One assistant, every workflow.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link to="/chat" className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90" style={{ boxShadow: "var(--shadow-elegant)" }}>
+              Start chatting <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link to="/email" className="inline-flex items-center gap-2 rounded-lg border bg-card px-4 py-2.5 text-sm font-medium hover:bg-muted">
+              Try email generator
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="mb-4 text-lg font-semibold">Tools</h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {tools.map((t) => (
+            <Link
+              key={t.to}
+              to={t.to}
+              className="group rounded-xl border bg-card p-5 transition hover:-translate-y-0.5 hover:border-primary/40"
+              style={{ boxShadow: "var(--shadow-soft)" }}
+            >
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-primary group-hover:text-primary-foreground" >
+                <t.icon className="h-5 w-5 transition-colors group-hover:text-primary" />
+              </div>
+              <h3 className="font-semibold">{t.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{t.desc}</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                Open <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10 flex items-start gap-3 rounded-xl border border-accent/30 bg-accent/10 p-4 text-sm">
+        <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent-foreground" />
+        <div>
+          <p className="font-medium">Responsible AI use</p>
+          <p className="text-muted-foreground">
+            Outputs are generated by AI and may be incomplete or inaccurate. Always review and edit before sending, sharing, or acting on them. Do not paste confidential information you wouldn't share with a third party.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
