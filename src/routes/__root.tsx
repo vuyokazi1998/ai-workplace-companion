@@ -110,6 +110,9 @@ function RootComponent() {
             <main className="flex-1">
               <Outlet />
             </main>
+            <footer className="border-t bg-background/80 px-4 py-3 text-center text-xs text-muted-foreground backdrop-blur">
+              &copy; {new Date().getFullYear()} vuyokazigxowa. All rights reserved.
+            </footer>
           </div>
         </div>
         <Toaster richColors position="top-right" />
