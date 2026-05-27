@@ -33,7 +33,7 @@ function Dashboard() {
             Powered by AI
           </div>
           <h1 className="mt-4 max-w-2xl text-3xl font-semibold leading-tight md:text-5xl">
-            Your workplace, <span style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>amplified by AI</span>.
+            Gxowa <span style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>vuyokazi</span>
           </h1>
           <p className="mt-3 max-w-xl text-sm text-muted-foreground md:text-base">
             Write emails, summarize meetings, plan tasks, and research smarter. One assistant, every workflow.
